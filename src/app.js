@@ -7,7 +7,7 @@ app.use(express.json());
 
 const notes = []
 
-// title, description
+// note = {title, description}
 //post , /notes
 
 
