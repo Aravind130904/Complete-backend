@@ -3,6 +3,7 @@ const express = require('express');
 const noteModel = require('./models/note.model')
 const multer = require('multer')
 const uploadFile = require('./services/storage.service')
+const postModel = require('./models/post.model')
 
 
 
@@ -79,11 +80,18 @@ app.patch('/notes/:id', async (req, res) => {
 
 app.post('/create-post', upload.single("image"), async (req, res) => {
 
-    console.log(req.body)
-    console.log(req.file)
+    
 
     const result = await uploadFile(req.file.buffer)
-    console.log(result)
+    
+    const post = await postModel.create({
+        image: result.url,
+        caption: req.body.caption
+    })
+    return res.status(201).json({
+        message: "Post created successfully",
+        post
+    })
 
 })
 
