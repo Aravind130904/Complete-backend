@@ -1,11 +1,20 @@
 // server creating 
 const express = require('express');
 const noteModel = require('./models/note.model')
+const multer = require('multer')
+
+
+
 
 const app = express();
 app.use(express.json());
 
 const notes = []
+
+
+const upload = multer({
+    storage: multer.memoryStorage()
+})
 
 // note = {title, description}
 //post , /notes
@@ -67,5 +76,12 @@ app.patch('/notes/:id', async (req, res) => {
 
 })
 
+
+app.post('/create-post', upload.single("image"), async (req, res) => {
+
+    console.log(req.body)
+    console.log(req.file)
+
+})
 
 module.exports = app
