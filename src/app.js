@@ -4,12 +4,16 @@ const noteModel = require('./models/note.model')
 const multer = require('multer')
 const uploadFile = require('./services/storage.service')
 const postModel = require('./models/post.model')
+const authRoutes = require('./routes/auth.routes')
 
 
 
 const app = express();
 app.use(express.json());
 
+
+app.use("/api/auth", authRoutes)
+/*
 const notes = []
 
 
@@ -94,5 +98,7 @@ app.post('/create-post', upload.single("image"), async (req, res) => {
     })
 
 })
+*/
+
 
 module.exports = app
